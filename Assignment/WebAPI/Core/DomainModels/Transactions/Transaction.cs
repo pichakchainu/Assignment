@@ -1,14 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using WebAPI.Core.DomainModels.Customers;
 
 namespace WebAPI.Core.DomainModels.Transactions
 {
     public class Transaction
     {
-        public Transaction()
-        {
-        }
-     
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }

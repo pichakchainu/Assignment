@@ -21,9 +21,7 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Core.DomainModels.Customers.Customer", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("Id");
 
                     b.Property<string>("Email");
 
@@ -38,11 +36,9 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Core.DomainModels.Transactions.Transaction", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("Id");
 
-                    b.Property<double>("Amount");
+                    b.Property<decimal>("Amount");
 
                     b.Property<string>("CurrencyCode");
 

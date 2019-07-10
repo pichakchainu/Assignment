@@ -11,7 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using StructureMap;
 using WebAPI.Infrastructure.EF;
+using WebAPI.Ioc;
 
 namespace WebAPI
 {
@@ -25,18 +27,37 @@ namespace WebAPI
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<AssignmentDbContext>(item => item.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            return this.ConfigureIoC(services);
+        }
+
+        public virtual IServiceProvider ConfigureIoC(IServiceCollection services)
+        {
+            var container = new Container();
+            container.Configure(config =>
+            {
+                config.AddRegistry(new StructureMapRegistry());
+                config.Populate(services);
+            });
+            return container.GetInstance<IServiceProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IContainer container)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                var assignmentDbContext = container.GetInstance<AssignmentDbContext>();
+                 if (!assignmentDbContext.Database.CanConnect())
+                {
+                    assignmentDbContext.Database.Migrate();
+                    assignmentDbContext.EnsureSeeded();
+                }
             }
             else
             {

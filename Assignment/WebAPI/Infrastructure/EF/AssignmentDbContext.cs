@@ -10,8 +10,8 @@ namespace WebAPI.Infrastructure.EF
         public AssignmentDbContext(DbContextOptions options) : base(options)
         {
         }
-        DbSet<Customer> Customers { get; set; }
-        DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
