@@ -12,18 +12,21 @@ namespace WebAPI.Services.Customers
         public ValidationResult IsValidationId(int id)
         {
             var result = new ValidationResult();
+
             if (id <= 0)
                 result.Errors.Add(new ValidationError() { AttemptedValue = id, ErrorMessage = "Invalid Customer ID", PropertyName = "id" });
+
             return result;
         }
 
         public ValidationResult IsValidationEmail(string email)
         {
             var result = new ValidationResult();
-            if (email == null || !IsEmailValid(email))
-            {
-                result.Errors.Add(new ValidationError() { AttemptedValue = email, ErrorMessage = "Invalid Email", PropertyName = "id" });
-            }
+
+            if (email == null)
+                result.Errors.Add(new ValidationError() { AttemptedValue = email, ErrorMessage = "No inquiry criteria", PropertyName = "email" });
+            else if (!IsEmailValid(email))
+                result.Errors.Add(new ValidationError() { AttemptedValue = email, ErrorMessage = "Invalid Email", PropertyName = "email" });
             return result;
         }
 
@@ -43,14 +46,12 @@ namespace WebAPI.Services.Customers
         public ValidationResult IsValidationIdAndEmail(int id, string email)
         {
             var result = new ValidationResult();
+            foreach (var error in IsValidationId(id).Errors)
+                result.Errors.Add(error);
 
-            if (id <= 0)
-                result.Errors.Add(new ValidationError() { AttemptedValue = id, ErrorMessage = "Invalid Customer ID", PropertyName = "id" });
+            foreach (var error in IsValidationEmail(email).Errors)
+                result.Errors.Add(error);
 
-            if (email == null || !IsEmailValid(email))
-            {
-                result.Errors.Add(new ValidationError() { AttemptedValue = email, ErrorMessage = "Invalid Email", PropertyName = "id" });
-            }
             return result;
         }
     }

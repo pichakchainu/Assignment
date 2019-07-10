@@ -8,6 +8,7 @@
   <ItemGroup>
     <Compile Remove="Migrations\20190710084126_addEntityBase.cs" />
     <Compile Remove="Migrations\20190710084659_addEntityBase.cs" />
+    <Compile Remove="Migrations\20190710111507_settingAttributeDomainModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
