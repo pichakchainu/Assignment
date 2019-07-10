@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebAPI.Migrations
@@ -11,7 +12,10 @@ namespace WebAPI.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    UpdatedDate = table.Column<DateTimeOffset>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     MobileNo = table.Column<string>(nullable: true)
@@ -25,7 +29,10 @@ namespace WebAPI.Migrations
                 name: "Transactions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    UpdatedDate = table.Column<DateTimeOffset>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     Amount = table.Column<decimal>(nullable: false),
                     CurrencyCode = table.Column<string>(nullable: true),

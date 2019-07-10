@@ -13,6 +13,7 @@ namespace WebAPI.Infrastructure.EF
             if (!context.Customers.Any())
             {
                 MockCustomers.CreateCustomers(context);
+                MockTransactions.CreateTransactions(context);
             }
         }
     }

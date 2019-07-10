@@ -4,13 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.Core.DomainModels.Customers;
 
-namespace WebAPI.Infrastructure.Repositories
+namespace WebAPI.Services
 {
-    public interface ICustomerRepository: IRepository<Customer>
+    public interface ICustomerService
     {
         IEnumerable<CustomerDTO> GetCustomerById(int id);
         IEnumerable<CustomerDTO> GetCustomerDTOByEmail(string email);
-        IEnumerable<CustomerDTO> GetCustomerDTOByIdAndEmail(int id,string email);
-
+        IEnumerable<CustomerDTO> GetCustomerDTOByIdAndEmail(int id, string email);
     }
 }

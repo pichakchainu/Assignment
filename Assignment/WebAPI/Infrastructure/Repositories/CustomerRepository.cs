@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.Core.DomainModels.Customers;
+using WebAPI.Core.Helpers.DBContextExtensions;
 using WebAPI.Infrastructure.EF;
 
 namespace WebAPI.Infrastructure.Repositories
@@ -31,6 +32,21 @@ namespace WebAPI.Infrastructure.Repositories
         public bool Update(Customer item)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<CustomerDTO> GetCustomerById(int id)
+        {
+            return assignmentDbContext.Customers.GetCustomerDTOById(id);
+        }
+
+        public IEnumerable<CustomerDTO> GetCustomerDTOByEmail(string email)
+        {
+            return assignmentDbContext.Customers.GetCustomerDTOByEmail(email);
+        }
+
+        public IEnumerable<CustomerDTO> GetCustomerDTOByIdAndEmail(int id, string email)
+        {
+            return assignmentDbContext.Customers.GetCustomerDTOByIdAndEmail(id, email);
         }
     }
 }

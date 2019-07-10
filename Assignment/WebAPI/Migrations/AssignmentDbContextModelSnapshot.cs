@@ -21,13 +21,19 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Core.DomainModels.Customers.Customer", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("CreatedDate");
 
                     b.Property<string>("Email");
 
                     b.Property<string>("MobileNo");
 
                     b.Property<string>("Name");
+
+                    b.Property<DateTimeOffset>("UpdatedDate");
 
                     b.HasKey("Id");
 
@@ -36,9 +42,13 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Core.DomainModels.Transactions.Transaction", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Amount");
+
+                    b.Property<DateTimeOffset>("CreatedDate");
 
                     b.Property<string>("CurrencyCode");
 
@@ -47,6 +57,8 @@ namespace WebAPI.Migrations
                     b.Property<DateTime>("Date");
 
                     b.Property<int>("Status");
+
+                    b.Property<DateTimeOffset>("UpdatedDate");
 
                     b.HasKey("Id");
 

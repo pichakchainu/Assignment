@@ -15,7 +15,6 @@ namespace WebAPI.Infrastructure.EF.Seeding
             {
                 var item = new Customer()
                 {
-                    Id = i,
                     Name = $"test{i}",
                     Email = $"test{i}@gmail.com",
                     MobileNo = $"063544555{i}"
