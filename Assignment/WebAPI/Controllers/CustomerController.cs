@@ -29,10 +29,7 @@ namespace WebAPI.Controllers
         {
             ValidationResult validResult = customerValidationService.IsValidationId(CustomerId);
             var result = customerService.GetCustomerById(CustomerId);
-            if (result.Count() > 0)
-                return APIResponse(customerService.GetCustomerById(CustomerId), validResult);
-            else
-                return NotFound();
+            return APIResponse(result, result.Count(), validResult);
         }
 
         [HttpGet("query/GetCustomerByEmail")]
@@ -40,19 +37,15 @@ namespace WebAPI.Controllers
         {
             ValidationResult validResult = customerValidationService.IsValidationEmail(Email);
             var result = customerService.GetCustomerDTOByEmail(Email);
-            if (result.Count() > 0)
-                return APIResponse(result, validResult);
-            else
-                return NotFound();
+            return APIResponse(result, result.Count(), validResult);
         }
 
-        //[HttpGet("query/GetCustomerByCustomerIdAndEmail")]
-        //public ActionResult<APIResponseWrapper<IEnumerable<CustomerDTO>>> GetCustomerByCustomerIdAndEmail(int CustomerId, string Email)
-        //{
-        //    //if (customerValidationService.IsValidationCustomerID(CustomerId) && customerValidationService.IsValidationEmail(Email))
-        //    //return APIResponse(customerService.GetCustomerDTOByIdAndEmail(CustomerId, Email));
-        //    //else
-        //    return BadRequest();
-        //}
+        [HttpGet("query/GetCustomerByCustomerIdAndEmail")]
+        public ActionResult<APIResponseWrapper<IEnumerable<CustomerDTO>>> GetCustomerByCustomerIdAndEmail(int CustomerId, string Email)
+        {
+            ValidationResult validResult = customerValidationService.IsValidationIdAndEmail(CustomerId, Email);
+            var result = customerService.GetCustomerDTOByIdAndEmail(CustomerId, Email);
+            return APIResponse(result, result.Count(), validResult);
+        }
     }
 }

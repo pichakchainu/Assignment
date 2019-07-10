@@ -10,5 +10,6 @@ namespace WebAPI.Services.Customers
     {
         ValidationResult IsValidationId(int id);
         ValidationResult IsValidationEmail(string email);
+        ValidationResult IsValidationIdAndEmail(int id, string email);
     }
 }

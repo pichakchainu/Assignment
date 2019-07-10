@@ -39,6 +39,20 @@ namespace WebAPI.Services.Customers
                 return false;
             }
         }
+
+        public ValidationResult IsValidationIdAndEmail(int id, string email)
+        {
+            var result = new ValidationResult();
+
+            if (id <= 0)
+                result.Errors.Add(new ValidationError() { AttemptedValue = id, ErrorMessage = "Invalid Customer ID", PropertyName = "id" });
+
+            if (email == null || !IsEmailValid(email))
+            {
+                result.Errors.Add(new ValidationError() { AttemptedValue = email, ErrorMessage = "Invalid Email", PropertyName = "id" });
+            }
+            return result;
+        }
     }
 
 }

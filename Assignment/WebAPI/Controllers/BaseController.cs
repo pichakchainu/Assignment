@@ -7,14 +7,14 @@ namespace WebAPI.Controllers
 {
     public class BaseController : ControllerBase
     {
-        protected ActionResult<APIResponseWrapper<T>> APIResponse<T>(T result, ValidationResult validationResult,
+        protected ActionResult<APIResponseWrapper<T>> APIResponse<T>(T result, int countResult, ValidationResult validationResult,
             int failureStatusCode = StatusCodes.Status500InternalServerError)
         {
-            return InternalAPIResponse<T>(result, validationResult, failureStatusCode);
+            return InternalAPIResponse<T>(result, countResult, validationResult, failureStatusCode);
         }
 
-        private ActionResult<APIResponseWrapper<T>> InternalAPIResponse<T>(object result, ValidationResult validationResult,
-       int failureStatusCode = StatusCodes.Status500InternalServerError)
+        private ActionResult<APIResponseWrapper<T>> InternalAPIResponse<T>(object result, int countResult, ValidationResult validationResult,
+             int failureStatusCode = StatusCodes.Status500InternalServerError)
         {
             var apiResponse = new APIResponseWrapper<T>();
 
@@ -22,6 +22,10 @@ namespace WebAPI.Controllers
             {
                 apiResponse.Errors = validationResult.Errors;
                 HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+            }
+            else if (countResult == 0)
+            {
+                HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
             }
             else
             {
