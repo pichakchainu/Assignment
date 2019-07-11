@@ -15,17 +15,17 @@ namespace WebAPI.Services
             this.customerRepository = customerRepository;
         }
 
-        public async Task<IEnumerable<CustomerDTO>> GetCustomerByIdAsync(int id)
+        public async Task<CustomerDTO> GetCustomerByIdAsync(int id)
         {
             return await customerRepository.GetCustomerByIdAsync(id);
         }
 
-        public async Task<IEnumerable<CustomerDTO>> GetCustomerDTOByEmailAsync(string email)
+        public async Task<CustomerDTO> GetCustomerDTOByEmailAsync(string email)
         {
             return await customerRepository.GetCustomerDTOByEmailAsync(email);
         }
 
-        public async Task<IEnumerable<CustomerDTO>> GetCustomerDTOByIdAndEmailAsync(int id, string email)
+        public async Task<CustomerDTO> GetCustomerDTOByIdAndEmailAsync(int id, string email)
         {
             return await customerRepository.GetCustomerDTOByIdAndEmailAsync(id, email);
         }

@@ -16,17 +16,17 @@ namespace WebAPI.Infrastructure.Repositories
             this.assignmentDbContext = assignmentDbContext;
         }
 
-        public async Task<IEnumerable<CustomerDTO>> GetCustomerByIdAsync(int id)
+        public async Task<CustomerDTO> GetCustomerByIdAsync(int id)
         {
             return await assignmentDbContext.Customers.GetCustomerDTOByIdAsync(id);
         }
 
-        public async Task<IEnumerable<CustomerDTO>> GetCustomerDTOByEmailAsync(string email)
+        public async Task<CustomerDTO> GetCustomerDTOByEmailAsync(string email)
         {
             return await assignmentDbContext.Customers.GetCustomerDTOByEmailAsync(email);
         }
 
-        public async Task<IEnumerable<CustomerDTO>> GetCustomerDTOByIdAndEmailAsync(int id, string email)
+        public async Task<CustomerDTO> GetCustomerDTOByIdAndEmailAsync(int id, string email)
         {
             return await assignmentDbContext.Customers.GetCustomerDTOByIdAndEmailAsync(id, email);
         }

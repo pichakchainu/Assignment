@@ -8,19 +8,19 @@ namespace WebAPI.Core.Helpers.DBContextExtensions
 {
     public static class DBContextCustomerExtensions
     {
-        public static async Task<IEnumerable<CustomerDTO>> GetCustomerDTOByIdAsync(this DbSet<Customer> dbSet,int id)
+        public static async Task<CustomerDTO> GetCustomerDTOByIdAsync(this DbSet<Customer> dbSet,int id)
         {
-            return await dbSet.Where(x => x.Id == id).Select(x => x.toCustomerDTO()).ToArrayAsync();
+            return await dbSet.Where(x => x.Id == id).Select(x => x.toCustomerDTO()).SingleOrDefaultAsync();
         }
 
-        public static async Task<IEnumerable<CustomerDTO>> GetCustomerDTOByEmailAsync(this DbSet<Customer> dbSet, string email)
+        public static async Task<CustomerDTO> GetCustomerDTOByEmailAsync(this DbSet<Customer> dbSet, string email)
         {
-            return await dbSet.Where(x => x.Email == email).Include(x=>x.Transactions).Select(x => x.toCustomerAndOneTransactionDTO()).ToArrayAsync();
+            return await dbSet.Where(x => x.Email == email).Include(x=>x.Transactions).Select(x => x.toCustomerAndOneTransactionDTO()).SingleOrDefaultAsync();
         }
 
-        public static async Task<IEnumerable<CustomerDTO>> GetCustomerDTOByIdAndEmailAsync(this DbSet<Customer> dbSet, int id, string email)
+        public static async Task<CustomerDTO> GetCustomerDTOByIdAndEmailAsync(this DbSet<Customer> dbSet, int id, string email)
         {
-            return await dbSet.Where(x =>x.Id==id && x.Email == email).Include(x => x.Transactions).Select(x => x.toCustomerDTO()).ToArrayAsync();
+            return await dbSet.Where(x =>x.Id==id && x.Email == email).Include(x => x.Transactions).Select(x => x.toCustomerDTO()).SingleOrDefaultAsync();
         }
     }
 }

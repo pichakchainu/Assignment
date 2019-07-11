@@ -8,11 +8,8 @@ namespace WebAPI.Core.DomainModels.Customers
 {
     public class Customer: EntityBase<int>
     {
-        [StringLength(30)]
         public string Name { get; set; }
-        [StringLength(25)]
         public string Email { get; set; }
-        [StringLength(10)]
         public string MobileNo { get; set; }
         public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 
