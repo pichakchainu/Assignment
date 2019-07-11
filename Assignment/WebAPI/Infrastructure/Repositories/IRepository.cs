@@ -7,10 +7,5 @@ namespace WebAPI.Infrastructure.Repositories
 {
    public interface IRepository<T>
     {
-        IEnumerable<T> GetAll();
-        bool Add(T item);
-        bool Update(T item);
-        bool Delete(int id);
-
     }
 }

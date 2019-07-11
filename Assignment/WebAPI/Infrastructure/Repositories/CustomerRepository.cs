@@ -15,24 +15,6 @@ namespace WebAPI.Infrastructure.Repositories
         {
             this.assignmentDbContext = assignmentDbContext;
         }
-        public IEnumerable<Customer> GetAll()
-        {
-            return assignmentDbContext.Customers;
-        }
-        public bool Add(Customer item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(Customer item)
-        {
-            throw new NotImplementedException();
-        }
 
         public IEnumerable<CustomerDTO> GetCustomerById(int id)
         {
