@@ -16,19 +16,19 @@ namespace WebAPI.Infrastructure.Repositories
             this.assignmentDbContext = assignmentDbContext;
         }
 
-        public IEnumerable<CustomerDTO> GetCustomerById(int id)
+        public async Task<IEnumerable<CustomerDTO>> GetCustomerByIdAsync(int id)
         {
-            return assignmentDbContext.Customers.GetCustomerDTOById(id);
+            return await assignmentDbContext.Customers.GetCustomerDTOByIdAsync(id);
         }
 
-        public IEnumerable<CustomerDTO> GetCustomerDTOByEmail(string email)
+        public async Task<IEnumerable<CustomerDTO>> GetCustomerDTOByEmailAsync(string email)
         {
-            return assignmentDbContext.Customers.GetCustomerDTOByEmail(email);
+            return await assignmentDbContext.Customers.GetCustomerDTOByEmailAsync(email);
         }
 
-        public IEnumerable<CustomerDTO> GetCustomerDTOByIdAndEmail(int id, string email)
+        public async Task<IEnumerable<CustomerDTO>> GetCustomerDTOByIdAndEmailAsync(int id, string email)
         {
-            return assignmentDbContext.Customers.GetCustomerDTOByIdAndEmail(id, email);
+            return await assignmentDbContext.Customers.GetCustomerDTOByIdAndEmailAsync(id, email);
         }
     }
 }

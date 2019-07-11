@@ -25,26 +25,26 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("query/GetCustomerById")]
-        public ActionResult<APIResponseWrapper<IEnumerable<CustomerDTO>>> GetCustomerById(int CustomerId)
+        public async Task<ActionResult<APIResponseWrapper<IEnumerable<CustomerDTO>>>> GetCustomerById(int CustomerId)
         {
             ValidationResult validResult = customerValidationService.IsValidationId(CustomerId);
-            var result = customerService.GetCustomerById(CustomerId);
+            var result = await customerService.GetCustomerByIdAsync(CustomerId);
             return APIResponse(result, result.Count(), validResult);
         }
 
         [HttpGet("query/GetCustomerByEmail")]
-        public ActionResult<APIResponseWrapper<IEnumerable<CustomerDTO>>> GetCustomerByEmail(string Email)
+        public async Task<ActionResult<APIResponseWrapper<IEnumerable<CustomerDTO>>>> GetCustomerByEmail(string Email)
         {
             ValidationResult validResult = customerValidationService.IsValidationEmail(Email);
-            var result = customerService.GetCustomerDTOByEmail(Email);
+            var result = await customerService.GetCustomerDTOByEmailAsync(Email);
             return APIResponse(result, result.Count(), validResult);
         }
 
         [HttpGet("query/GetCustomerByCustomerIdAndEmail")]
-        public ActionResult<APIResponseWrapper<IEnumerable<CustomerDTO>>> GetCustomerByCustomerIdAndEmail(int CustomerId, string Email)
+        public async Task<ActionResult<APIResponseWrapper<IEnumerable<CustomerDTO>>>> GetCustomerByCustomerIdAndEmail(int CustomerId, string Email)
         {
             ValidationResult validResult = customerValidationService.IsValidationIdAndEmail(CustomerId, Email);
-            var result = customerService.GetCustomerDTOByIdAndEmail(CustomerId, Email);
+            var result = await customerService.GetCustomerDTOByIdAndEmailAsync(CustomerId, Email);
             return APIResponse(result, result.Count(), validResult);
         }
     }

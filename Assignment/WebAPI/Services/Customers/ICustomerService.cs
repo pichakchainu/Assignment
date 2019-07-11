@@ -8,8 +8,8 @@ namespace WebAPI.Services
 {
     public interface ICustomerService
     {
-        IEnumerable<CustomerDTO> GetCustomerById(int id);
-        IEnumerable<CustomerDTO> GetCustomerDTOByEmail(string email);
-        IEnumerable<CustomerDTO> GetCustomerDTOByIdAndEmail(int id, string email);
+        Task<IEnumerable<CustomerDTO>> GetCustomerByIdAsync(int id);
+        Task<IEnumerable<CustomerDTO>> GetCustomerDTOByEmailAsync(string email);
+        Task<IEnumerable<CustomerDTO>> GetCustomerDTOByIdAndEmailAsync(int id, string email);
     }
 }
